@@ -113,10 +113,10 @@ def handle_photo():
                                                     'type': ['image']
                                                     }
                         }
-            date_list.append(date)
+            date_list.append(year_month)
             list_info.append(new_dict)
-        elif date in date_list:  # 是同一个日期,找到在 Date 数组中的索引
-            index = date_list.index(date)
+        elif year_month in date_list:  # 是同一个日期,找到在 Date 数组中的索引
+            index = date_list.index(year_month)
             list_info[index]['arr']['link'].append(filename)
             list_info[index]['arr']['text'].append(info)
             list_info[index]['arr']['type'].append('image')
