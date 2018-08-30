@@ -1,1 +1,14 @@
-{"list": [{"date": "2018-08", "arr": {"text": ["\u51b2\u9e2d", "\u770b\u8001\u5b50\u5e72\u5565"], "type": ["image", "image"], "month": 8, "link": ["2018-08-24_\u51b2\u9e2d.JPG", "2018-08-25_\u770b\u8001\u5b50\u5e72\u5565.JPG"], "year": 2018}}, {"date": "2018-07", "arr": {"text": ["meinv"], "type": ["image"], "month": 7, "link": ["2018-07-28_meinv.png"], "year": 2018}}]}
+{
+    "list": [
+    {
+        "date": "2018-08",
+        "arr":
+        {
+            "year": 2018,
+            "month": 8,
+            "link": ["2018-08-24_\u51b2\u9e2d.JPG", "2018-08-25_\u770b\u8001\u5b50\u5e72\u5565.JPG"],
+            "text": ["\u51b2\u9e2d", "\u770b\u8001\u5b50\u5e72\u5565"],
+            "type": ["image", "image"]
+        }
+    }]
+}
