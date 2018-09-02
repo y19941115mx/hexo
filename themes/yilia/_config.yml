@@ -36,9 +36,9 @@ mathjax: false
 
 # 打赏
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
-reward_type: 0
-reward_wording: '谢谢你请我吃糖果'
-alipay: /assets/img/alipay.jpg
+reward_type: 2
+reward_wording: '扫码 加好友😈'
+# alipay: /assets/img/alipay.jpg
 weixin: /assets/img/weixin.jpg
 
 # 目录
@@ -64,10 +64,11 @@ favicon: /assets/img/favicon.ico
 avatar: /assets/blogImg/profile.png
 
 #是否开启分享
-share_jia: false
+share_jia: true
+
 
 mobile:
-  social: false
+  social: true
 
 #评论：1、多说；2、网易云跟帖；3、畅言；4、Disqus 不需要使用某项，直接设置值为false，或注释掉
 #请参考wiki：
@@ -81,6 +82,20 @@ mobile:
 #3、畅言
 # changyan_appid: 'cysX3aGWt'
 # changyan_conf: 'prod_1dcda447175aada96edcdb7e412338fa'
+# 必力
+livere: 'MTAyMC8zOTQ1MC8xNTk3Nw=='
+
+#6、gitalk评论
+gitalk:
+  enable:  true
+  githubID:  y19941115mx
+  repo:  'gittalk'
+  ClientID:  '389b7c12f6ae27554333'
+  ClientSecret:  '0a688246a34819bf5bdb70d8e8b6924e8844b48c'
+  adminUser:  y19941115mx
+  perPage: 15
+  distractionFreeMode: true
+
 
 #4、Disqus 在hexo根目录的config里也有disqus_shortname字段，优先使用yilia的
 disqus: false

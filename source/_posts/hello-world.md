@@ -13,7 +13,8 @@ tags: 编程
 7. 可以在navigate栏中 选中对应的类来生成单元测试文件
 8. 图形化 VCS 操作git 在vcs工具栏中使用
 9. ssh远程部署 Tool菜单的Deployment 配置远程服务器
-
+10. command + d 直接复制一行
+11. alt + shift + 上下 移动代码
 <!--more-->
 
 # sublime
