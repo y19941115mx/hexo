@@ -1,10 +1,12 @@
 ---
 title: 常用编辑器 快捷键（Mac）
+tags: 编程工具
+---
+---
+title: 常用编辑器 快捷键（Mac）
 tags: 编程
 ---
-![快捷键.jpg](https://upload-images.jianshu.io/upload_images/9531730-ba94c774f8c62a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-<!--more-->
-
+# pycharm
 0. 关于注释 使用三个双引号 然后回车
 1. 查看使用库源码：cmd + click on anyywhere
 2. 格式化代码 Command+Option+L
@@ -17,6 +19,9 @@ tags: 编程
 9. ssh远程部署 Tool菜单的Deployment 配置远程服务器
 10. command + d 直接复制一行
 11. alt + shift + 上下 移动代码
+<!--more-->
+
+![快捷键.jpg](https://upload-images.jianshu.io/upload_images/9531730-ba94c774f8c62a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 # sublime
 **快捷键**：
@@ -210,8 +215,8 @@ u |撤销上步操作
 # ipython（jupyterNoteBook）
 常用魔法命令
 
-header 1 | header 2
+快捷键 | 操作
 ---|---
 % run| 执行脚本，并且可以在ipython 中使用该脚本中的变量
 %time | 执行**一条**语句所需要的时间（%timeit 更精确）
-%timeit | 可以测试一个函数体所需要的时间
+%%time | 可以测试一个函数体所需要的时间
