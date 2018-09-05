@@ -2,17 +2,13 @@
 title: 常用编辑器 快捷键（Mac）
 tags: 编程工具
 ---
----
-title: 常用编辑器 快捷键（Mac）
-tags: 编程
----
 # pycharm
 0. 关于注释 使用三个双引号 然后回车
 1. 查看使用库源码：cmd + click on anyywhere
 2. 格式化代码 Command+Option+L
 3. Command + J ，就可以直接插入常用代码了
-4. Command+P 可以显示出光标处函数参数。
 <!--more-->
+4. Command+P 可以显示出光标处函数参数。
 5. 分栏操作 右键文件名 split 
 6. cmd + shift +o 打开文件 Search Everywhere 两次 shift 不仅是文件名包括函数名或者变量
 7. 可以在navigate栏中 选中对应的类来生成单元测试文件
@@ -36,16 +32,54 @@ alt + command + 1 or 2 | 开启关闭分栏模式
 cmd + p | 查找文件
 cmd +shift + p | 呼出功能菜单
 
+**插件安装**
+
+```
+1. AdvancedNewFile插件
+
+2. anaconda_python 支持python操作 
+// package setting
+
+{
+
+"python_interpreter": "python安装位置/python.exe",
+
+"suppress_word_completions":true,
+
+"suppress_explicit_completions":true,
+
+"complete_parameters":true,
+
+"anaconda_linting": false
+
+}
+
+3. side bar 增强边栏功能
+4. all Autocomplete与better completion(需要配置) 实现代码自动补全提示
+5. sftp 服务器上传工具
+
+6. HTML/css/js prttity 右键就可以找到快速格式化html,css,js代码
+
+7. terminal 插件
+shift +command + T 在当前文件夹打开命令行
+
+8. bs3-snipit
+
+[https://github.com/JasonMortonNZ/bs3-sublime-plugin](https://github.com/JasonMortonNZ/bs3-sublime-plugin)
+
+9. Markdown 支持
+Markdown Editing 
+```
 
 **sublime常用设置**
 ```
-// 设置tab键为四个空格
+// 全局setting
 
 "tab_size": 4,
 
 "translate_tabs_to_spaces": true
 
-快捷键配置
+//全局key Binding
 
 [
 
@@ -86,61 +120,6 @@ cmd +shift + p | 呼出功能菜单
 ]
 ```
 
-**插件安装**
-
-```
-AdvancedNewFile插件
-
-anaconda_python 支持python操作
-
-{
-
-"python_interpreter": "python安装位置/python.exe",
-
-"suppress_word_completions":true,
-
-"suppress_explicit_completions":true,
-
-"complete_parameters":true,
-
-"anaconda_linting": false
-
-}
-
-3. side bar 增强边栏功能
-
-[
-
-//chrome
-
-{ "keys": ["f2"], "command": "side_bar_files_open_with",
-
-"args": {
-
-"paths": [],
-
-"application": "F:\\chrome\\Chrome\\Application\\old_chrome.exe",
-
-"extensions":".*"
-
-}
-
-}
-
-]
-
-
-
-3. all Autocomplete与better completion(配置) 实现代码自动补全提示
-
-4. sftp 服务器上传工具
-
-5. HTML/css/js prttity 右键就可以找到快速格式化html,css,js代码
-
-6. terminal 插件
-shift +command + T 在当前文件夹打开命令行
-```
-
 **emmet 语法**
 
 子代 >生成层级关系
@@ -148,11 +127,9 @@ shift +command + T 在当前文件夹打开命令行
 > div>ul>li{标签内的内容}
 
 兄弟 + 生成并列关系
-
 > div+ul +li
 
 父代^
-
 > li^div 生成父节点
 
 重复: *次数
@@ -164,14 +141,6 @@ id: #idnum
 class: .classname
 
 属性: [name="hello"]
-
-7. bs3-snipit
-
-[https://github.com/JasonMortonNZ/bs3-sublime-plugin](https://github.com/JasonMortonNZ/bs3-sublime-plugin)
-
-8. Markdown 支持
-Markdown Editing 
-
 
 # vi 的配置与使用
 保存到自己的.vimrc
