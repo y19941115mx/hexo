@@ -6,8 +6,8 @@ tags: 编程工具
 0. 关于注释 使用三个双引号 然后回车
 1. 查看使用库源码：cmd + click on anyywhere
 2. 格式化代码 Command+Option+L
+ <!--more-->
 3. Command + J ，就可以直接插入常用代码了
-<!--more-->
 4. Command+P 可以显示出光标处函数参数。
 5. 分栏操作 右键文件名 split 
 6. cmd + shift +o 打开文件 Search Everywhere 两次 shift 不仅是文件名包括函数名或者变量
@@ -34,7 +34,7 @@ cmd +shift + p | 呼出功能菜单
 
 **插件安装**
 
-```
+```bash
 1. AdvancedNewFile插件
 
 2. anaconda_python 支持python操作 
@@ -72,7 +72,7 @@ Markdown Editing 
 ```
 
 **sublime常用设置**
-```
+```bash
 // 全局setting
 
 "tab_size": 4,
@@ -120,7 +120,7 @@ Markdown Editing 
 ]
 ```
 
-**emmet 语法**
+**emmet语法**
 
 子代 >生成层级关系
 
@@ -144,7 +144,7 @@ class: .classname
 
 # vi 的配置与使用
 保存到自己的.vimrc
-```
+```bash
 let python_highlight_all=1
 syntax on
 set encoding=utf-8
@@ -183,7 +183,6 @@ u |撤销上步操作
 
 # ipython（jupyterNoteBook）
 常用魔法命令
-
 快捷键 | 操作
 ---|---
 % run| 执行脚本，并且可以在ipython 中使用该脚本中的变量
