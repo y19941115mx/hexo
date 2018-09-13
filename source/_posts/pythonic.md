@@ -4,6 +4,7 @@ date: 2018-09-13 20:22:22
 tags: [编程, python]
 ---
 > 众所周知 python作为解释性语言 它的执行速度和编译性语言相比 是非常慢的 它的优势在于  代码的易读和语法的简洁 为了发挥他的这些优势 写代码的时候 应该结合python的语法特性 写出真正pythonic的代码
+> <!--more-->
 
 ### 一行以蔽之
 列表生成式是很强大的功能 适用于对列表或者字典进行的简单Map和Filter操作
@@ -320,7 +321,7 @@ os.isfile(x)| 判断x是否为文件
 1536841053.011322 
 >>> sleep() # 程序睡眠
 ```
-![转换关系.jpg](http://note.youdao.com/yws/res/6490/WEBRESOURCE795da7e0c61c8e0523d1b1dc7597efb7)
+![转换关系.jpg](https://ws2.sinaimg.cn/large/0069RVTdgy1fv86si9gs0j30qi01xq3g.jpg)
 这里没有考虑到时区 如果涉及到多个时区的转换处理
 [查看更多详细内容](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431937554888869fb52b812243dda6103214cd61d0c2000)
 
