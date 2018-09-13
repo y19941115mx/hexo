@@ -246,8 +246,8 @@ q.get()
   - re.compile() 得到模式的对象pattern（re.compile(r'',re.I)忽视大小写）
   - pattern.match(str) 再调用match方法，match对象有group(),span()，groups()对分组操作
  - 或者类似re.match(pattern,str),直接使用模块方法，传入模式对象
-
 re模块的方法
+0. re.split() 分割文本 返回分割字符串得到的列表 re.split(r':|,|、')可以用多个|连接多个分割符
 1. match(pattern,string) 只在字符串开头匹配字符串，返回match对象，如果不是开始位置匹配成功的话，match()就返回none,
 2. search(pattern,string) 在整个字符串匹配字符,方法同match
 查找所有匹配：
@@ -261,8 +261,6 @@ def add1(match):
 re.sub(r'(\d{4})-(\d)-(\d)',r'\2:\3:\1',string) # 使用组用 \+相对位置 获取组值
 re.sub(r'(?P<year>\d{4})-(P<day>\d)',r'\g<mon>/\g<day>/\g<year>', s)
 ```
-5. re.split() 分割文本 返回分割字符串得到的列表
-re.split(r':|,|、')可以用多个|连接多个分割符
 
 ##### 文件与目录处理
 操作文件和目录的函数一部分放在os模块中，一部分放在os.path模块中
