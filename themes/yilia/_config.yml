@@ -117,15 +117,15 @@ slider:
 #  friends: false
 smart_menu:
   innerArchive: '所有文章'
-  friends: false
+  friends: 友情链接
   aboutme: '关于我'
 
 friends:
-  友情链接1: http://localhost:4000/
-  友情链接2: http://localhost:4000/
-  友情链接3: http://localhost:4000/
-  友情链接4: http://localhost:4000/
-  友情链接5: http://localhost:4000/
-  友情链接6: http://localhost:4000/
+  廖学峰的python3教程: https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000
+  微积分基础: https://www.bilibili.com/video/av24325548/?spm_id_from=333.788.videocard.0
+  线性代数基础: https://www.bilibili.com/video/av6731067
+  # 友情链接4: http://localhost:4000/
+  # 友情链接5: http://localhost:4000/
+  # 友情链接6: http://localhost:4000/
 
 aboutme: 喝过最烈的酒，<br/>也放过不该放的手 <br/><br/> 从前不会回头，<br/>往后不会将就

@@ -3,19 +3,19 @@ title: 常用编辑器 快捷键（Mac）
 tags: 编程工具
 ---
 # pycharm
-0. 关于注释 使用三个双引号 然后回车
-1. 查看使用库源码：cmd + click on anyywhere
-2. 格式化代码 Command+Option+L
- <!--more-->
-3. Command + J ，就可以直接插入常用代码了
-4. Command+P 可以显示出光标处函数参数。
-5. 分栏操作 右键文件名 split 
-6. cmd + shift +o 打开文件 Search Everywhere 两次 shift 不仅是文件名包括函数名或者变量
-7. 可以在navigate栏中 选中对应的类来生成单元测试文件
-8. 图形化 VCS 操作git 在vcs工具栏中使用
-9. ssh远程部署 Tool菜单的Deployment 配置远程服务器
-10. command + d 直接复制一行
-11. alt + shift + 上下 移动代码
+1. 关于注释 使用三个双引号 然后回车
+2. 查看使用库源码：cmd + click on anyywhere
+3. 格式化代码 Command+Option+L
+<!--more-->
+4. Command + J ，就可以直接插入常用代码了
+5. Command+P 可以显示出光标处函数参数。
+6. 分栏操作 右键文件名 split 
+7. cmd + shift +o 打开文件 Search Everywhere 两次 shift 不仅是文件名包括函数名或者变量
+8. 可以在navigate栏中 选中对应的类来生成单元测试文件
+9. 图形化 VCS 操作git 在vcs工具栏中使用
+10. ssh远程部署 Tool菜单的Deployment 配置远程服务器
+11. command + d 直接复制一行
+12. alt + shift + 上下 移动代码
 
 ![快捷键.jpg](https://upload-images.jianshu.io/upload_images/9531730-ba94c774f8c62a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
