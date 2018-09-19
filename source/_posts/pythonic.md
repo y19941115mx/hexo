@@ -7,7 +7,7 @@ tags: [编程, python]
 <!--more-->
 
 ### 一行以蔽之
-列表生成式是很强大的功能 适用于对列表或者字典进行的简单Map和Filter操作
+列表生成式是很强大的功能 适用于对列表或者字典进行的简单Map和Filter操作 
 ```python
 # 处理list
 l_result = [x.lower() for x in data if x.startswith('A') == 0]
@@ -17,15 +17,18 @@ d_result = {k: v for k, v in mapdata.items() if v >= 30 and v < 100}
 arr = [item for arr in two_d_arr for item in arr if item > 1] # two_d_arr = [[1, 2], [3, 4]]
 
 ```
-行内表达式 可以用来简化判断、交换 赋值操作
+行内表达式 包括元组自动解包和三元表达式，可以用来简化判断、交换 赋值操作 
 ```python
 people = self.people or People() # 判空操作
 result = 1 if xxx else 0  # 实现三元表达式
 a, b = b, a # 行内交互元素
-a, b = 1, 2 # 行内多个元素同时赋值
+a, b = 1, 2 # 元祖自动解包，多个元素同时赋值
+# 对应于列表s可以使用元祖解包取代列表索引和切片操作
+#  day, mon, year = s 取代 s[0], s[1], s[2]分别赋值
+# a,*rest,b = s 取代 s[0], s[1:-1], s[-1]分别赋值
 ```
 ### 使用生成器
-生成器只保存算法，需要的数据用到时再计算，在for循环（迭代器）和生成列表时能够大量节省内存
+生成器只保存算法，数据只在用到时再计算，配合for循环（迭代器）和列表生成式时能够大量节省内存
 ```python
 # 在类中自定义生成器方法 生成固定长度的斐波那契数列
 class fibClass(object):
@@ -48,10 +51,9 @@ if __name__ == '__main__':
 ```
 ### 函数装饰器
 利用python高级函数的特性（可以将函数作为参数） 实现函数装饰器的功能 可以动态为函数填加功能
-
----
-
-下面的例子给函数添加了计时功能，使用类的方式传值给装饰器 注意闭包的使用 如果传递的闭包变量在 返回的函数中发生改变 则 要使用可变对象（例如list或dict）
+下面的例子给函数添加了计时功能，使用类的方式传值给装饰器 注意闭包的使用，在闭包的内函数中，我们可以随意使用外函数绑定来的变量，但是如果我们想修改外函数的变量数值的时候发现出问题了，在基本的python语法当中，一个函数可以随意读取全局数据，但是要修改全局数据的时候有两种方法:1 global 声明全局变量 2 全局变量是可变类型数据的时候可以修改。在闭包内函数也是类似的情况。在内函数中想修改闭包变量（外函数绑定给内函数的局部变量）的时候：
+1. 在python3中，可以用nonlocal 关键字声明 一个变量，表示这个变量不是局部变量空间的变量，需要向上一层变量空间找这个变量。
+2. 在python2中，没有nonlocal这个关键字，我们可以把闭包变量改成可变类型数据进行修改，比如列表或者字典.
 ```python
 from time import  time, sleep
 from datetime import datetime
@@ -62,10 +64,13 @@ class CallingInfo(object):
         self.args = args
 
     def info(self,func):
+        # n = 0
         ncalls = {'n': 0}
         def wrapper(*args,**kwargs):
             now = datetime.now()
             start = time()
+            # nonlocal  n
+            # n += 1
             ncalls['n'] += 1
             res = func(*args,**kwargs)
             used = time() - start
@@ -108,7 +113,6 @@ class Student(object):
 
 ```
 python中有很多以__XXX___ 命名的魔术方法 使用它们能够帮助我们更好的定制类
-
 #### 常用的魔术方法
 方法名 | 说明
 ---|---

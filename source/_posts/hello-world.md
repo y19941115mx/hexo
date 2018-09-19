@@ -1,45 +1,60 @@
 ---
-title: 常用编辑器 快捷键（Mac）
+title: 常用编程工具（Mac）
 tags: 编程工具
 ---
-# pycharm
-1. 关于注释 使用三个双引号 然后回车
-2. 查看使用库源码：cmd + click on anyywhere
-3. 格式化代码 Command+Option+L
+俗话说得好，“磨刀不误砍柴功”，选择合适的编程工具，能够帮助开发人员更加高效的进行代码编辑，协助进行版本控制、代码测试和源码读取，在开发的过程中，极大地提高我们的工作效率。这里介绍几款自己常用的编程工具。
 <!--more-->
-4. Command + J ，就可以直接插入常用代码了
-5. Command+P 可以显示出光标处函数参数。
-6. 分栏操作 右键文件名 split 
-7. cmd + shift +o 打开文件 Search Everywhere 两次 shift 不仅是文件名包括函数名或者变量
-8. 可以在navigate栏中 选中对应的类来生成单元测试文件
-9. 图形化 VCS 操作git 在vcs工具栏中使用
-10. ssh远程部署 Tool菜单的Deployment 配置远程服务器
-11. command + d 直接复制一行
-12. alt + shift + 上下 移动代码
+### pycharm：高富帅
+pycharm是JetBrains公司推出的一款python的集成开发工具，“JetBrains出品，必属精品”，秉承一贯的高品质，是一个功能非常完备的python IDE。但启动太慢，占有内存资源过多是其缺点。这里列举几个开发中经常用到的功能
 
-![快捷键.jpg](https://upload-images.jianshu.io/upload_images/9531730-ba94c774f8c62a27.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+1. 添加注释 使用三个双引号然后回车 可以自动生成备注
+2. 查看源码 cmd + click on anyywhere
+3. 格式化代码 Command+Option+L
+4. Command + J 插入常用代码
+5. Command+P 可以显示出光标处函数参数
+6. 分栏操作 右键文件名 点击split 
+7. cmd + shift +o 搜索文件并打开 
+8. shift * 2  Search Everywhere 不仅是文件名包括函数名或者变量
+9. cmd + shift + T 为当前的函数生成单元测试类 常用的是self.assertEqual()进行测试
+10. vcs工具栏 进行git版本控制 常用是commit(提交) revert(撤销修改) reset(撤销版本)操作 注意revert和同名的git命令略有不同这里是撤销修改。
+11. Tool菜单的Deployment 配置远程服务器 进行ssh远程部署
+12. command + d 直接复制一行 
+13. option + shift + 上下 移动代码
 
-# sublime
-**快捷键**：
-
+### sublime：经济适用型
+拥有记事本的打开速度，配合丰富的插件，使得文本编辑器也能拥有接近IDE的开发体验，是快速开发程序的利器。
+#### 快捷键
 快捷键 | 功能
 :---:|---
-command + ctrl + 上下键| 移动代码
-ctrl +d | 选中标签内的内容
-command+d | 多行操作
-shift +command +d | 直接复制该行
-alt + command + 1 or 2 | 开启关闭分栏模式
+cmd + d | 多行操作 常用于多行替换
+cmd + f | 查找文件 支持正则
+cmd + shift + f | 全局查找 支持正则
 cmd + p | 查找文件
 cmd +shift + p | 呼出功能菜单
+cmd + B | 直接编译
 
-**插件安装**
+#### 插件安装
+subliem只有配合使用各种插件 才能发挥出真正的功效，这里列举几个我在开发中经常用到的插件，至于sublime怎么安装插件大家可以自行百度。
 
+1. AdvancedNewFile插件 cmd + n快速新建文件
+2. anaconda_python 支持python 大家可以对应自己经常使用的编程语言下载对应的插件 例如经常做微信小程序开发，可以下载wxapp插件。
+3. side bar 增强边栏功能 f2用浏览器打开文件
+4. all Autocomplete 会搜索所有打开的文件来寻找匹配的提示词
+5. sftp 远程部署工具
+6. HTML-css-js prttity 右键就可以快速格式化html,css,js代码
+7. terminal 插件 shift +command + T 在当前文件夹打开命令行
+9. Markdown Editing  Markdown的语法高亮提醒
+10. Color Highlighter 显示颜色功能
+11. AutoFileName 快速帮助你在文件中写路径
+
+#### 配置
 ```bash
-1. AdvancedNewFile插件
+// 全局setting
+"tab_size": 4,
 
-2. anaconda_python 支持python操作 
-// package setting
+"translate_tabs_to_spaces": true
 
+// anaconda setting
 {
 
 "python_interpreter": "python安装位置/python.exe",
@@ -54,74 +69,26 @@ cmd +shift + p | 呼出功能菜单
 
 }
 
-3. side bar 增强边栏功能
-4. all Autocomplete与better completion(需要配置) 实现代码自动补全提示
-5. sftp 服务器上传工具
-
-6. HTML/css/js prttity 右键就可以找到快速格式化html,css,js代码
-
-7. terminal 插件
-shift +command + T 在当前文件夹打开命令行
-
-8. bs3-snipit
-
-[https://github.com/JasonMortonNZ/bs3-sublime-plugin](https://github.com/JasonMortonNZ/bs3-sublime-plugin)
-
-9. Markdown 支持
-Markdown Editing 
-```
-
-**sublime常用设置**
-```bash
-// 全局setting
-
-"tab_size": 4,
-
-"translate_tabs_to_spaces": true
-
 //全局key Binding
-
-[
-
-//chrome
-
-{ "keys": ["f2"], "command": "side_bar_files_open_with",
-
-"args": {
-
-"paths": [],
-
-"application": "/Applications/Google Chrome.app",
-
-"extensions":".*"
-
-}
-
-},
-
-{
-
-"command": "anaconda_doc", "keys": ["alt+/"], "context": [
-
-{"key": "selector", "operator": "equal", "operand": "source.python"}
-
-]
-
-},
-
-// 自动对齐
-
-{"keys": ["ctrl+i"], "command": "reindent" , "args":
-
-{"single_line": false}},
-
-{ "keys": ["super+n"], "command": "advanced_new_file_new" }
-
+[ 
+    { "keys": ["f2"], "command": "side_bar_files_open_with",
+            "args": {
+                "paths": [],
+                "application": "/Applications/Google Chrome.app",
+                "extensions":".*"
+            }
+     },
+     {
+        "command": "anaconda_doc", "keys": ["alt+/"], "context": [
+            {"key": "selector", "operator": "equal", "operand": "source.python"}
+        ]
+    },
+    {"keys": ["ctrl+i"], "command": "reindent" , "args":
+    {"single_line": false}},
+    { "keys": ["super+n"], "command": "advanced_new_file_new" }
 ]
 ```
-
-**emmet语法**
-
+#### emmet语法
 子代 >生成层级关系
 
 > div>ul>li{标签内的内容}
@@ -142,8 +109,8 @@ class: .classname
 
 属性: [name="hello"]
 
-# vi 的配置与使用
-保存到自己的.vimrc
+### vi：编辑器之神
+万能编辑器，编辑器界的王者，Linux下最好用的编辑器。首先在用户目录下编辑自己的.vimrc文件，进行相关配置。
 ```bash
 let python_highlight_all=1
 syntax on
@@ -158,12 +125,10 @@ set autoindent
 set fileformat=unix
 
 ```
-
-vi编辑器：
-
+#### 常用快捷键
 快捷键 | 操作
----|:---:
-control + f(b)  | 翻页
+:---:|---
+control + f(b) | 翻页
 o（O）| 光标来到下一行（上一行）
 a(A) | 光标来到行首和行末 
 :1 | 光标来到首行
@@ -181,10 +146,11 @@ u |撤销上步操作
 !+shell命令 | 执行shell命令后返回vim
 *例如：!python name 编译python程序*
 
-# ipython（jupyterNoteBook）
-常用魔法命令
+### jupyterNoteBook
+既满足交互性，又具备可读性，jupyterNoteBook是python进行机器学习和数据炼金术的常用工具 它的快捷键在首页就有提示。这里只列举几个常用的魔法命令
+#### 常用魔法命令
 快捷键 | 操作
 ---|---
-% run| 执行脚本，并且可以在ipython 中使用该脚本中的变量
+% run | 执行脚本，并且可以在ipython中使用该脚本中的变量
 %time | 执行**一条**语句所需要的时间（%timeit 更精确）
 %%time | 可以测试一个函数体所需要的时间

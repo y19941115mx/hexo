@@ -3,12 +3,13 @@ title: 爬虫技术基础
 date: 2018-09-17 20:20:12
 tags: [python, 爬虫]
 ---
-## requests 库的使用
-### 安装
+>这里主要介绍了两个爬虫中最常使用的库，requests和xpath。
+### 安装requests
+```python
     pip install requests
+```
 <!--more-->
 ### 发送请求
-#### （1）请求方式
 * Get 查看资源
 * POST 增加资源
 * PUT 修改资源     
@@ -17,13 +18,13 @@ tags: [python, 爬虫]
 * HEAD 查看响应头
 * OPTIONS 查看可用的请求方法
 
-#### （2）请求api
+#### api
 * get 方式 后面跟拼接参数:   requests.get(url, params={'key1':'value1'})
 * 表单参数提交: requests.post(url, data={'key1':'value1','key2':'value2'})
 * json 参数提交  requests.post(url, json={'key1':'value1','key2':'value2'})
 * 提交文件 requests.post(url, files={'file':open('sss.csv','rb')})
 
-#### （3）请求异常处理（异常放在requests.exceptions包内）
+#### 异常处理（异常放在requests.exceptions包内）
 1. 请求超时处理：except exceptions.Timeout
 requests.get(url, timeout=10)
 2. 错误码异常处理 except exceptions.HTTPError
@@ -62,7 +63,7 @@ resp = requests.post('http://httpbin.org/post', files=files)
 ```
 
 ### 解析响应
-#### 1.响应状态码：
+#### 响应状态码：
 ``` bash
 1XX:消息
 
@@ -78,9 +79,7 @@ resp = requests.post('http://httpbin.org/post', files=files)
 5XX 服务器端错误：
 500 服务器端有bug 501 无法识别请求的方法502 网关错误 503 服务不可用
 ```
-
- ## 2. 响应的api 
-#### 基本api        
+#### api        
 * status_code 状态码
 
 * reason 响应情况 
@@ -91,12 +90,13 @@ resp = requests.post('http://httpbin.org/post', files=files)
 
 * request 获得响应对应的请求的对象，有headers 和 body
 
-#### 内容相关的api:
 * content() 读取二进制内容 常用于图片下载
+
 * text() 解析为解码后的字符串(可以修改requests.encoding = 'utf-8' 默认是utf-8)
+
 * json() 将json格式的响应解析为python中的字典
 
-### demo
+### requests demo
 ``` python
 一.图片下载
 from contextlib import closing
@@ -111,16 +111,7 @@ Gecko/20100101 Firefox/51.0'}
         for chunk in response.iter_content(128):
             f.write(chunk)
 ```
-
-二、事件钩子(Event Hooks) 发送请求，在获取响应时回调钩子函数
-``` python
-import requests
-def func(response,*args,**kws):
-    pass
-requests.get(url,hooks=dict(response=func))
-```
-### 使用进阶
-#### (1) HTTP认证
+### requests使用进阶
 1.基本认证，验证账号与密码requests.get(url,auth=(name,password))
 2.OAUTH认证
 ``` python
@@ -158,10 +149,10 @@ proxies = {
     "http": "http://user:pass@10.10.1.10:3128/",
 }
 ```
-## xpath的使用
-### 安装
+
+### xpath安装
     pip install lxml
-### Demo
+### xpathDemo
 ``` python
 from lxml import etree
 # 字符串读取html
@@ -235,7 +226,7 @@ print result[0].tag
 span
 
 ```
-#### 进阶用法
+### xpath进阶用法
 ``` python
 # 对节点进行xpath查询 处理字段缺失
 tables = html.xpath("//div[@class='indent']//table")
@@ -255,10 +246,10 @@ print(l1)
 
 # 结果： sss second item ss
 ```
-## 爬虫进阶
+### 爬虫进阶
 MongoDB的使用 设置下载缓存和实现多进程爬取
 [demo](https://github.com/y19941115mx/CrawlingLyric)
 
-## 相关教程
+### 相关教程
 [爬虫教程](http://www.jqhtml.com/13259.html)
 
