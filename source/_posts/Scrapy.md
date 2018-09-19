@@ -1,5 +1,5 @@
 ---
-title: Scrapy爬虫框架的使用（更新中）
+title: Python3 爬虫开发（更新中）
 date: 2018-09-17 20:31:54
 tags: [python, 爬虫]
 ---
@@ -7,7 +7,6 @@ tags: [python, 爬虫]
 ### 1. 创建自定义爬虫
     scrapy startproject zhihurb
 <!--more-->
-
 ### 目录结构
     scrapy.cfg: 项目的配置文件(很少用)
     zhihurb/: 该项目的python模块。之后您将在此加入代码。
