@@ -82,7 +82,7 @@ mobile:
 # changyan_appid: 'cysX3aGWt'
 # changyan_conf: 'prod_1dcda447175aada96edcdb7e412338fa'
 # 必力
-livere: 'MTAyMC8zOTQ1MC8xNTk3Nw=='
+# livere: 'MTAyMC8zOTQ1MC8xNTk3Nw=='
 
 #6、gitalk评论
 gitalk:
