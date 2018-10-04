@@ -2,10 +2,10 @@
 title: 常用编程工具（Mac）
 tags: 编程工具
 ---
-俗话说得好，“磨刀不误砍柴功”，选择合适的编程工具，能够帮助开发人员更加高效的进行代码编辑，协助开发人员进行版本控制、代码测试和源码读取，在开发的过程中，极大地提高我们的工作效率。这里介绍几款自己常用的编程工具。
+> 俗话说得好，“磨刀不误砍柴功”，选择合适的编程工具，能够帮助开发人员更加高效的进行代码编辑，协助开发人员进行版本控制、代码测试和源码读取，在开发的过程中，极大地提高我们的工作效率。这里介绍几款常用的编程工具。
 <!--more-->
 ### pycharm：高富帅
-pycharm是JetBrains公司推出的一款python的集成开发工具，“JetBrains出品，必属精品”，秉承一贯的高品质，是一个功能非常完备的python IDE。但启动太慢，占有内存资源过多是其缺点。这里列举几个开发中经常用到的功能
+pycharm是JetBrains公司推出的一款python的集成开发工具，“JetBrains出品，必属精品”，几乎所有编程语言，都能找到该公司开发的对应IDE，这里拿pycharm举例，列举几个开发中常用到的功能和快捷键，对于他们家其他的IDE基本是通用的。
 
 1. 添加注释 使用三个双引号然后回车 可以自动生成备注
 2. 查看源码 cmd + click on anyywhere
@@ -23,15 +23,17 @@ pycharm是JetBrains公司推出的一款python的集成开发工具，“JetBrai
 
 ### sublime：经济适用型
 拥有记事本的打开速度，配合丰富的插件，使得文本编辑器也能拥有接近IDE的开发体验，是快速开发程序的利器。
-#### 快捷键
+#### 常用快捷键
 快捷键 | 功能
 :---:|---
 cmd + d | 多行操作 常用于多行替换
 cmd + f | 查找文件 支持正则
-cmd + shift + f | 全局查找 支持正则
-cmd + p | 查找文件
+cmd + r | 文件替换，需要修改快捷键
+cmd + i | 格式化选中的代码，需要修改快捷键
+cmd + shift + f | 全局查找、替换 支持正则
+cmd + p | 查找文件 使用@ 查找当前文件的结构
 cmd +shift + p | 呼出功能菜单
-cmd + B | 直接编译
+cmd + B | 直接编译(python编译请使用默认的Python 使用Anaconda会有中文乱码问题)
 
 #### 插件安装
 subliem只有配合使用各种插件 才能发挥出真正的功效，这里列举几个我在开发中经常用到的插件，至于sublime怎么安装插件大家可以自行百度。
@@ -85,7 +87,9 @@ subliem只有配合使用各种插件 才能发挥出真正的功效，这里列
     },
     {"keys": ["ctrl+i"], "command": "reindent" , "args":
     {"single_line": false}},
-    { "keys": ["super+n"], "command": "advanced_new_file_new" }
+    { "keys": ["super+n"], "command": "advanced_new_file_new" },
+    { "keys": ["super+r"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
+
 ]
 ```
 #### emmet语法

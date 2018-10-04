@@ -3,11 +3,11 @@ title: pythonic 编程实践
 date: 2018-09-13 20:22:22
 tags: [编程, python]
 ---
-> 众所周知 python作为解释性语言 它的执行速度和编译性语言相比 是非常慢的 它的优势在于  代码的易读和语法的简洁 为了发挥他的这些优势 写代码的时候 应该结合python的语法特性 写出真正pythonic的代码
+> 众所周知 python作为动态语言 它的执行速度和静态语言相比 是非常慢的 它的优势在于  代码的易读性和语法的简洁 为了发挥它的这些优势 我们在写代码的时候 应该结合python的语法特性 写出真正pythonic的代码
 <!--more-->
 
 ### 一行以蔽之
-列表生成式是很强大的功能 适用于对列表或者字典进行的简单Map和Filter操作 
+列表生成式是python中很好用的功能 可以对列表或者字典进行的简单Map和Filter操作 
 ```python
 # 处理list
 l_result = [x.lower() for x in data if x.startswith('A') == 0]
@@ -21,14 +21,14 @@ arr = [item for arr in two_d_arr for item in arr if item > 1] # two_d_arr = [[1,
 ```python
 people = self.people or People() # 判空操作
 result = 1 if xxx else 0  # 实现三元表达式
-a, b = b, a # 行内交互元素
+a, b = b, a # 行内交换元素
 a, b = 1, 2 # 元祖自动解包，多个元素同时赋值
 # 对应于列表s可以使用元祖解包取代列表索引和切片操作
 #  day, mon, year = s 取代 s[0], s[1], s[2]分别赋值
 # a,*rest,b = s 取代 s[0], s[1:-1], s[-1]分别赋值
 ```
 ### 使用生成器
-生成器只保存算法，数据只在用到时再计算，配合for循环（迭代器）和列表生成式能够节省内存
+生成器只保存算法，数据只在用到时再计算，配合for循环（迭代器）和列表生成式能够节省内存 在爬虫程序中被广泛使用。
 ```python
 # 在类中自定义生成器方法 生成固定长度的斐波那契数列
 class fibClass(object):
@@ -138,68 +138,93 @@ class Circle:
 ```
 
 ### 多进程和多线程
-因为全局解释锁的存在，使用python多线程无法实现多cpu计算。通常用来处理多IO的操作，下面的例子使用一个线程处理文件 多个线程进行下载。使用线程安全的queue包中的Queue进行线程间通信。
+因为全局解释锁的存在，使用python多线程无法实现多cpu计算。通常用来处理多IO的操作，下面的例子使用多个线程进行图片下载。使用线程安全的queue包中的Queue进行线程间通信，实现自动下载国家地理-中国网站首页的前15张图片。每个礼拜运行一次，作为windows的壁纸。
 ```python
-import requests, csv
-from threading import Thread
+import requests
+from bs4 import BeautifulSoup
+from urllib import parse
+import os
+import threading
 from queue import Queue
-class DownloadThread(Thread):
-    """docstring for DownloadThread"""
-    def __init__(self, sid, queue):
-        super(DownloadThread, self).__init__()
-        self.sid = sid 
-        self.url = "http://table.finance.yahoo.com/table.csv?s=%s.sz"
-        self.url %= str(sid).rjust(6,'0')
-        self.queue = queue
-    
-    def download(self, url):
-        re = requests.get(self.url,timeout=3)
-        if re.status_code == 200:
-            return re.text
+import shutil
 
-    def run(self):
-        print('Download',self.sid)
-        data = self.download(self.url)
-        self.queue.put((self.sid, data))
 
-class ConvertThread(Thread):
-    """docstring for ConvertThread"""
-    def __init__(self,queue):
-        super(ConvertThread, self).__init__()
-        self.queue = queue
-    
-    def tocsv(self,data,fname):
-        reader = csv.reader(data.split('x')) # 传入下载的csv文件的行分隔符 通常为'\n' 
-        with open(fname,'w') as wf:
-            writer = csv.writer(wf)
-            writer.writerow(next(reader))
-            for line in reader:
-                '''找2016年1月1日后且交易额大于5千万的写入pingan2.csv'''
-                if line[0] < '2016-01-01':
-                    break
-                if int(line[5]) > 50000000:
-                    writer.writerow(line)
-    
-    def run(self):
+header = ''''''
+url = 'http://www.ngchina.com.cn/photography/photo_of_the_day/'
+
+class Crawl(object):
+    """docstring for Crawl"""
+    def __init__(self, url, header=None, dir_name='images',n=5):
+        super(Crawl, self).__init__()
+        self.url = url
+        self.header = header
+        self.queue = Queue()
+        self.n = 5 # 默认开启5个线程
+        self.dir_path = os.path.join(r'C:\Users\Administrator', dir_name)
+        print(self.dir_path)
+        if os.path.exists(self.dir_path):
+           shutil.rmtree(self.dir_path)
+           print('delete old dir')
+        print('create new dir %s' % (dir_name))
+        os.mkdir(self.dir_path)
+
+    def __call__(self):
+        # 爬虫调度入口
+        urls = self.get_img_url() + self.n * [-1]
+        for url in urls:
+            self.queue.put(url)
+        # 开启线程 进行图片爬取
+        t_threads = [threading.Thread(target=self.download_img, args=(self.queue,)) for _ in range(self.n)]
+        for thread in t_threads:
+            thread.start()
+        for thread in t_threads:
+            thread.join()
+        print('download success！')
+
+
+    def download_img(self, q):
+        # x
         while True:
-            sid, data = self.queue.get()
-            print('convert',sid)
-            if sid == -1:
+            url = q.get()
+            if url == -1:
+                print('thread over！')
                 break
-            if data:
-                fname = 'result_%s.csv' % str(sid)
-                self.tocsv(data,fname)
+            print('download_url:', url)
+            with requests.Session() as session:
+                html_content = session.get(url, headers=self.header).text
+                soup = BeautifulSoup(html_content,'html.parser')
+                node = soup.find('a', href='###')
+                if not node:
+                    print('解析网页出错')
+                    exit()
+                img_url = node.find('img')['src']
+                file_name = img_url.split('/')[-1]
+                file_path = os.path.join(self.dir_path, file_name) 
+                # 下载图片
+                response = session.get(img_url)
+                with open(file_path,'wb') as f:
+                    for chunk in response.iter_content(128):
+                        f.write(chunk)    
+
+    def  get_img_url(self):
+        # 获取首页列表图片的地址
+        index = requests.get(self.url,headers=self.header)
+        index_content = index.text
+        soup = BeautifulSoup(index_content, 'html.parser')
+        nodes = soup.select('body > div.content.js_content > div > div > ul > li > a')
+        if not nodes:
+            print("解析网页出错")
+            exit()
+        img_urls = [parse.urljoin(self.url, node['href'])  for node in nodes]
+        print('will download %s pictures' % (len(img_urls)))
+        return img_urls
+
 
 if __name__ == '__main__':
-    q = Queue()
-    dThreads = [DownloadThread(i, q) for i in range(1,5)]
-    cThread = ConvertThread(q)
-    for t in dThreads:
-        t.start()
-    cThread.start()
-    for t in dThreads:
-        t.join()
-    q.put((-1, None))
+    crawl = Crawl(url)
+    crawl()
+
+
 
 ```
 使用多进程 计算多个cpu密集型任务
@@ -207,6 +232,7 @@ if __name__ == '__main__':
 # 启动多进程方式同多线程，这里采用函数式的方式 进程间无法访问主进程变量 不存在锁的问题
 import multiprocessing
 
+# 普通方式启动多进程
 def process_link_crawler():
     num_cpus = multiprocessing.cpu_count()
     print('num_cpus:', num_cpus)
