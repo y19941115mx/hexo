@@ -52,11 +52,12 @@ if __name__ == '__main__':
 ### 函数装饰器
 利用python高级函数的特性（可以将函数作为参数） 实现函数装饰器的功能 可以动态为函数填加功能
 下面的例子给函数添加了计时功能，使用类的方式传值给装饰器 注意闭包的使用，在闭包的内函数中，我们可以随意使用外函数绑定来的变量，但是如果我们想修改外函数的变量数值的时候发现出问题了，在基本的python语法当中，一个函数可以随意读取全局数据，但是要修改全局数据的时候有两种方法:1 global 声明全局变量 2 全局变量是可变类型数据的时候可以修改。在闭包内函数也是类似的情况。在内函数中想修改闭包变量（外函数绑定给内函数的局部变量）的时候：
-1. 在python3中，可以用nonlocal 关键字声明 一个变量，表示这个变量不是局部变量空间的变量，需要向上一层变量空间找这个变量。
+1. 在python3中，可以用nonlocal 关键字声明 一个变量，表示这个变量不是局部变量空间的变量，需要向上一层变量空间找这个变量。global 代表是全局变量
 2. 在python2中，没有nonlocal这个关键字，我们可以把闭包变量改成可变类型数据进行修改，比如列表或者字典.
 ```python
 from time import  time, sleep
 from datetime import datetime
+
 class CallingInfo(object):
     def __init__(self, args= None):
         self.formatter = '%(func)s -> [%(time)s - %(used)s - %(ncalls)s]'
@@ -138,7 +139,7 @@ class Circle:
 ```
 
 ### 多进程和多线程
-因为全局解释锁的存在，使用python多线程无法实现多cpu计算。通常用来处理多IO的操作，下面的例子使用多个线程进行图片下载。使用线程安全的queue包中的Queue进行线程间通信，实现自动下载国家地理-中国网站首页的前15张图片。每个礼拜运行一次，作为windows的壁纸。
+因为全局解释锁的存在，使用python多线程无法实现cpu密集型计算，下面的例子使用多个线程进行图片下载。使用线程安全的queue包中的Queue进行线程间通信，实现自动下载国家地理-中国网站首页的前15张图片。每个礼拜运行一次，作为windows的壁纸。
 ```python
 import requests
 from bs4 import BeautifulSoup
@@ -147,7 +148,7 @@ import os
 import threading
 from queue import Queue
 import shutil
-
+from time import time
 
 header = ''''''
 url = 'http://www.ngchina.com.cn/photography/photo_of_the_day/'
@@ -160,7 +161,8 @@ class Crawl(object):
         self.header = header
         self.queue = Queue()
         self.n = 5 # 默认开启5个线程
-        self.dir_path = os.path.join(r'C:\Users\Administrator', dir_name)
+        self.dir_path = os.path.join(os.path.abspath('.'), dir_name)
+        g_dir_path = self.dir_path
         print(self.dir_path)
         if os.path.exists(self.dir_path):
            shutil.rmtree(self.dir_path)
@@ -168,22 +170,22 @@ class Crawl(object):
         print('create new dir %s' % (dir_name))
         os.mkdir(self.dir_path)
 
-    def __call__(self):
-        # 爬虫调度入口
+    def crawl_thread(self):
+        now = time()
+        # 多线程爬虫
         urls = self.get_img_url() + self.n * [-1]
         for url in urls:
             self.queue.put(url)
-        # 开启线程 进行图片爬取
+        # 开启n个线程 进行图片爬取
         t_threads = [threading.Thread(target=self.download_img, args=(self.queue,)) for _ in range(self.n)]
         for thread in t_threads:
             thread.start()
         for thread in t_threads:
             thread.join()
-        print('download success！')
-
+        used = time() - now
+        print('thread download success！used:%s' % used)
 
     def download_img(self, q):
-        # x
         while True:
             url = q.get()
             if url == -1:
@@ -219,35 +221,46 @@ class Crawl(object):
         print('will download %s pictures' % (len(img_urls)))
         return img_urls
 
-
 if __name__ == '__main__':
     crawl = Crawl(url)
-    crawl()
+    crawl.crawl_thread()
 
 
 
 ```
-使用多进程 计算多个cpu密集型任务
+这里使用多进程执行同样的图片下载任务 测试发现所用时间 和多线程时差不多，但是多进程的开销更大，所以通常使用多进程处理cpu密集操作，使用多线程处理io密集型操作。
 ```python
-# 启动多进程方式同多线程，这里采用函数式的方式 进程间无法访问主进程变量 不存在锁的问题
-import multiprocessing
+# 使用多进程方式并行下载图片
+from multiprocessing.pool import Pool
 
-# 普通方式启动多进程
-def process_link_crawler():
-    num_cpus = multiprocessing.cpu_count()
-    print('num_cpus:', num_cpus)
-    process = []
-    for i in range(num_cpus):
-        p = multiprocessing.Process(target=main)
-        p.start()
-        process.append(p)
-    for p in process:
-        p.join()
+def download_img_process(url):
+    print('download_url:', url)
+    with requests.Session() as session:
+        html_content = session.get(url).text
+        soup = BeautifulSoup(html_content,'html.parser')
+        node = soup.find('a', href='###')
+        if not node:
+            print('解析网页出错')
+            exit()
+        img_url = node.find('img')['src']
+        file_name = img_url.split('/')[-1]
+        file_path = os.path.join(g_dir_path, file_name) 
+        # 下载图片
+        response = session.get(img_url)
+        with open(file_path,'wb') as f:
+            for chunk in response.iter_content(128):
+                f.write(chunk)  
 
-# 如果要启动大量的子进程，可以用进程池的方式批量创建子进程：
-from multiprocessing import Pool
-p = Pool(3)
-p.apply_async(long_time_task, args=(i,))
+def crawl_process(self):
+        now = time()
+        urls = (self.get_img_url())
+        # 使用进程池 进行图片爬取
+        pool = Pool(5)
+        pool.map(download_img_process, urls) # 
+        pool.close()
+        pool.join()
+        used = time() - now
+        print('process download success！used:%s' % used) 
 
 # 进程间通信
 from multiprocessing import Queue
