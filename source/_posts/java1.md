@@ -31,7 +31,7 @@ Java是完全的面向对象编程语言，对象是java程序的基本组成部
 
 下图中女孩为类，而具体的每个人为该类的对象：
 
-![](../imgs/girl.png)
+![](/assets/img/girl.png)
 
 ``` java
 class Girl {
@@ -55,7 +55,7 @@ Lisa.say()
 2. 堆 用于存放所有new出来的Java对象和对象中的成员变量
 3. 方法区 类装载后保存在这个位置，存放的是类中定义的方法，基本类型常量和字符串常量、static修饰的全局变量和函数。
 
-![java 内存](../imgs/java_1.png)
+![java 内存](/assets/img/java_1.png)
 
 #### 特例1：基本类型
 
@@ -159,7 +159,7 @@ Lisa.print_score()
 
 访问权限
 
-![访问权限](../imgs/java_3.png)
+![访问权限](/assets/img/java_3.png)
 Java声明变量或方法的时候没有写上修饰符为default。
 
 课堂练习：
@@ -176,7 +176,7 @@ Java声明变量或方法的时候没有写上修饰符为default。
 class Animal{
 
     public void say():
-        System.out.println('Animal is saying...');
+        System.out.println('Animal is saying/assets.');
 
 }
 ```
